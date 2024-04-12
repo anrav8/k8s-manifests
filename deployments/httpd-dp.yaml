@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: web-dp
+  name: httpd-dp
 spec:
-  replicas: 4
+  replicas: 1
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -11,11 +11,11 @@ spec:
       maxSurge: 1
   selector:
     matchLabels:
-      app: web-dp
+      app.kubernetes.io/name: httpd
   template:
     metadata:
       labels:
-        app: web-dp
+        app.kubernetes.io/name: httpd
     spec:
       containers:
         - name: httpd
