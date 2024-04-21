@@ -17,6 +17,13 @@ spec:
       labels:
         app.kubernetes.io/name: httpd
     spec:
+      nodeSelector:
+         dedicated: true
+      tolerations:
+        - key: "usercase"
+          operator: "Equal"
+          value: "workload"
+          effect: "NoSchedule"      
       containers:
         - name: httpd
           image: httpd
