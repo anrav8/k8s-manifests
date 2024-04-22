@@ -7,5 +7,13 @@ spec:
   containers:
   - image: redis
     name: redis
+    volumeMounts:
+      - name: nfs-pvc
+        mountPath: "/data"
   - image: bitnami/redis-exporter:latest
     name: redis-exporter
+  volumes:
+    - name: nfs-pvc
+      persistentVolumeClaim:
+        claimName: nfs-data
+  
