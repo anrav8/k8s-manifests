@@ -1,0 +1,32 @@
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  name: custcrd.extcust.k8s.com
+spec:
+  group: extcust.k8s.com
+  versions:
+    - name: v1
+      served: true
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                task:
+                  type: string
+                result:
+                  type: string
+                checks:
+                  type: array
+                  items:
+                    type: string      
+  scope: Namespaced
+  names:
+    plural: custcrds
+    singular: custcrd
+    kind: Custcrd
+    shortNames:
+    - custcrd
