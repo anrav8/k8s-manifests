@@ -23,6 +23,13 @@ spec:
       containers:
         - name: nginx
           image: nginx:latest
+          volumeMounts:
+            - mountPath: /etc/nginx/nginx.conf
+              name: nginx-conf
+              subPath: nginx.conf
+            - mountPath: /etc/env
+              name: pass
+              readOnly: true  
           livenessProbe:
             httpGet:
               path: /health
@@ -33,4 +40,12 @@ spec:
             exec:
               command:
                 - curl
-                - "http://127.0.0.1:80"      
+                - "http://127.0.0.1:80"
+      volumes:
+        - name: nginx-conf
+          configMap:
+             name: nginx-conf
+        - name: pass
+          secret:
+            secretName: nginx-env
+             
